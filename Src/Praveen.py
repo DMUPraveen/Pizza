@@ -18,8 +18,6 @@ class ChooseBestPizza():
         
 
 
-
-
 class Pizza_Key_Maker:
     def __init__(self):
         self.dictionary = {}
@@ -60,10 +58,6 @@ class DeliverSystem:
         self.Stack.append([set(),[]])
         self.current_Delviery = self.Stack[-1]
         
-        
-
-        
-
 
     def add_Pizza_to_delivery(self,PizzaId,toppingSet):
         if(len(self.current_Delviery[1]) >= self.current_Delivery_team_type):
