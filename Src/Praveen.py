@@ -1,6 +1,7 @@
 class Pizza_Key_Maker:
     def __init__(self):
         self.dictionary = {}
+        self.allIngrediants =set()
 
     def add_pizza(self,id,line):
         ingrediants = line.split(" ")[1:]
@@ -17,7 +18,7 @@ class Deliveries:
         self.four_deliveries = []
     
 
-    def deliver(self):
+    def push_delivery(self,)
     
 
 
