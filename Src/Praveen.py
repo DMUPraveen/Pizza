@@ -108,9 +108,17 @@ def main():
                     PizzaData.dictionary,
                     PizzaData.PizzaToppings
                     )
-                chooser.usePizza(Pizzaid,PizzaData.PizzaToppings)
+
                 deliveries.add_Pizza_to_delivery(Pizzaid,PizzaData.PizzaToppings[Pizzaid])
-    deliveries.Stack.pop(-1)
+                chooser.usePizza(Pizzaid,PizzaData.PizzaToppings)
+            if(MiddleBreak):
+                break    
+    
+        if(MiddleBreak):
+            break
+    
+    if(MiddleBreak):
+        deliveries.Stack.pop(-1)
     deliveries.createSolution("..\\Output\\test.txt")
 
 
