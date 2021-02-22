@@ -1,4 +1,5 @@
 from Samith import file_handling,scoring_system
+from viranga import score
 import os
 
 
@@ -83,9 +84,9 @@ class DeliverSystem:
                 
 
     
-def main():
+def main(File_name):
     os.chdir("C:\\Users\\USER\\Desktop\\Competition\\HashCode\\Pizza\\Src")
-    _,teams_2,teams_3,teams_4,list_of_pizzas = file_handling("b_little_bit_of_everything.in")
+    _,teams_2,teams_3,teams_4,list_of_pizzas = file_handling(File_name)
     PizzaData = Pizza_Key_Maker()
     for id,line in enumerate(list_of_pizzas):
         PizzaData.add_pizza(id,line)
@@ -119,12 +120,14 @@ def main():
     
     if(MiddleBreak):
         deliveries.Stack.pop(-1)
-    deliveries.createSolution("..\\Output\\test.txt")
+    deliveries.createSolution(f"..\\Output\\{File_name}")
+    return score(f"..\\Output\\{File_name}",f"..\\Input\\{File_name}")
 
 
 
 if __name__ == "__main__":
-    main()
+    print(main("b_little_bit_of_everything.in"))
+
 
 
 

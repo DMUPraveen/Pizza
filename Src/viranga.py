@@ -55,4 +55,4 @@ def score(y,z):
     return sum(topping_count)
 
 
-print(score("Submission.txt","b_little_bit_of_everything.in"))
+#print(score("Submission.txt","b_little_bit_of_everything.in"))
