@@ -4,6 +4,7 @@ def file_handling(file_name:str):
         list_of_pizzas=[]
         for line in f:
             line=line[:-1]
+            line = line.rstrip()
             list_of_pizzas.append([])
             for word in line.split(" "):
                 list_of_pizzas[-1].append(word)

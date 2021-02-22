@@ -1,4 +1,4 @@
-from Samith import file_handling,scoring_system
+from Samith import file_handling
 from viranga import score
 import os
 
