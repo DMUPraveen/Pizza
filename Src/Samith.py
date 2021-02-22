@@ -25,5 +25,5 @@ def scoring_system(pizza_list:list,all_ingredients:set,ingredients_of_team:set,p
         pizza_scores[ID]=len(needed_ingredients.intersection(pizza_dict[ID]))
     
     return pizza_scores
-print(file_handling())
+#print(file_handling())
 #print(scoring_system([],set(),set(),{}))
