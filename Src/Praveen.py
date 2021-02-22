@@ -11,7 +11,10 @@ class ChooseBestPizza():
         for ingredient in needed_ingredients:
             for id in pizza_dict[ingredient]:
                 if(id not in self.usedPizzas):
-                    pizza_scores[id] += 1
+                    if(id not in pizza_scores):
+                        pizza_scores[id] =0
+                    else:
+                        pizza_scores[id] +=1
         return max(pizza_scores,key=pizza_scores.get)
     def usePizza(self,PizzaId):
         self.usedPizzas.add(PizzaId)
