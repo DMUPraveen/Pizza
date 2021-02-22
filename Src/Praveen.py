@@ -1,3 +1,6 @@
+from Samith import file_handling
+
+
 class Pizza_Key_Maker:
     def __init__(self):
         self.dictionary = {}
@@ -16,7 +19,7 @@ class Pizza_Key_Maker:
                 self.dictionary[ingrediant] = [id]
 
                 
-class Deliveries:
+class DeliverSystem:
     def __init__(self,twoSize,threeSize,fourSize):
         self.two_stack = [] #contains a pair (set(ingrediants),pizza ids)
         self.three_stack = []
@@ -56,6 +59,21 @@ class Deliveries:
         return True
 
     
+
+
+no_pizzas,teams_2,teams_3,teams_4,list_of_pizzas = file_handling()
+PizzaData = Pizza_Key_Maker()
+for id,line in enumerate(list_of_pizzas):
+    PizzaData.add_pizza(id,line)
+
+deliveries = DeliverSystem(teams_2,teams_3,teams_4)
+
+
+
+
+
+
+
 
 
         

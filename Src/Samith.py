@@ -13,7 +13,7 @@ def file_handling():
     teams_2=int(teams_2)
     teams_3=int(teams_3)
     teams_4=int(teams_4)
-    print(list_of_pizzas)
+    #print(list_of_pizzas)
     #print("hi")
     return no_pizzas,teams_2,teams_3,teams_4,list_of_pizzas
 
