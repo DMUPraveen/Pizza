@@ -5,7 +5,7 @@ import os
 class ChooseBestPizza():
     def __init__(self):
         self.usedPizzas = set()
-    def scoring_system(self,all_ingredients:set,ingredients_of_team:set,pizza_dict:{}):
+    def scoring_system(self,all_ingredients:set,ingredients_of_team:set,pizza_dict:{},PizzaToppings):
         pizza_scores={}
         needed_ingredients=set(all_ingredients.difference(ingredients_of_team))
         for ingredient in needed_ingredients:
@@ -15,10 +15,14 @@ class ChooseBestPizza():
                         pizza_scores[id] =0
                     else:
                         pizza_scores[id] +=1
-        return max(pizza_scores,key=pizza_scores.get)
-    def usePizza(self,PizzaId):
+        try :                
+            return max(pizza_scores,key=pizza_scores.get)
+        except:
+            return min(PizzaToppings,key = lambda x:len(PizzaToppings[x]))
+            
+    def usePizza(self,PizzaId,PizzaToppings):
         self.usedPizzas.add(PizzaId)
-        
+        del(PizzaToppings[PizzaId])
 
 
 class Pizza_Key_Maker:
@@ -88,19 +92,25 @@ def main():
 
     deliveries = DeliverSystem(teams_2,teams_3,teams_4)
     chooser = ChooseBestPizza()
+    MiddleBreak = False
     for team_type in range(4,1,-1):
 
         for _ in range(deliveries.max_Sizes[team_type]):
+            deliveries.push_delivery(team_type)
             for _ in range(team_type):
+                if(len(PizzaData.PizzaToppings) == 0):
+                    MiddleBreak = True
+                    break
 
-                deliveries.push_delivery(team_type)
                 Pizzaid = chooser.scoring_system(
                     PizzaData.allIngrediants,
                     deliveries.current_Delviery[0],
-                    PizzaData.dictionary
+                    PizzaData.dictionary,
+                    PizzaData.PizzaToppings
                     )
-                chooser.usePizza(Pizzaid)
+                chooser.usePizza(Pizzaid,PizzaData.PizzaToppings)
                 deliveries.add_Pizza_to_delivery(Pizzaid,PizzaData.PizzaToppings[Pizzaid])
+    deliveries.Stack.pop(-1)
     deliveries.createSolution("..\\Output\\test.txt")
 
 
