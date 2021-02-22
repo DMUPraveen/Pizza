@@ -5,7 +5,7 @@ import os
 class ChooseBestPizza():
     def __init__(self):
         self.usedPizzas = set()
-    def scoring_system(self,pizza_set:set,all_ingredients:set,ingredients_of_team:set,pizza_dict:{}):
+    def scoring_system(self,all_ingredients:set,ingredients_of_team:set,pizza_dict:{}):
         pizza_scores={}
         needed_ingredients=set(all_ingredients.difference(ingredients_of_team))
         for ingredient in needed_ingredients:
@@ -61,26 +61,49 @@ class DeliverSystem:
 
     def add_Pizza_to_delivery(self,PizzaId,toppingSet):
         if(len(self.current_Delviery[1]) >= self.current_Delivery_team_type):
-            return False
+            raise Exception("Team overflow")
         self.current_Delviery[0] = set.union(self.current_Delviery[0],toppingSet)
         self.current_Delviery[1].append(PizzaId)
-        return True
+   
+
+    def createSolution(self,filePath):
+        with open(filePath,"w+") as f:
+            f.write(f"{len(self.Stack)}\n")
+            for delivery in self.Stack:
+                ids = " ".join([str(i) for i in delivery[1]])
+                team_type = len(delivery[1])
+                f.write(f"{team_type} {ids}\n")
+                
 
     
+def main():
+    os.chdir("C:\\Users\\USER\\Desktop\\Competition\\HashCode\\Pizza\\Src")
+    _,teams_2,teams_3,teams_4,list_of_pizzas = file_handling("b_little_bit_of_everything.in")
+    PizzaData = Pizza_Key_Maker()
+    for id,line in enumerate(list_of_pizzas):
+        PizzaData.add_pizza(id,line)
 
-os.chdir("C:\\Users\\USER\\Desktop\\Competition\\HashCode\\Pizza\\Src")
-no_pizzas,teams_2,teams_3,teams_4,list_of_pizzas = file_handling()
-PizzaData = Pizza_Key_Maker()
-for id,line in enumerate(list_of_pizzas):
-    PizzaData.add_pizza(id,line)
+    deliveries = DeliverSystem(teams_2,teams_3,teams_4)
+    chooser = ChooseBestPizza()
+    for team_type in range(4,1,-1):
 
-deliveries = DeliverSystem(teams_2,teams_3,teams_4)
-chooser = ChooseBestPizza()
+        for _ in range(deliveries.max_Sizes[team_type]):
+            for _ in range(team_type):
+
+                deliveries.push_delivery(team_type)
+                Pizzaid = chooser.scoring_system(
+                    PizzaData.allIngrediants,
+                    deliveries.current_Delviery[0],
+                    PizzaData.dictionary
+                    )
+                chooser.usePizza(Pizzaid)
+                deliveries.add_Pizza_to_delivery(Pizzaid,PizzaData.PizzaToppings[Pizzaid])
+    deliveries.createSolution("..\\Output\\test.txt")
 
 
 
-
-
+if __name__ == "__main__":
+    main()
 
 
 
