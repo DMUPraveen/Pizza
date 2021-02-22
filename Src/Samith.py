@@ -1,5 +1,5 @@
 def file_handling():
-    with open("../src/b_little_bit_of_everything.in") as f:
+    with open("../srcgit push/b_little_bit_of_everything.in") as f:
         list_of_pizzas=[]
         for line in f:
             line=line[:-2]
@@ -16,5 +16,14 @@ def file_handling():
     #print(list_of_pizzas)
     #print("hi")
     return no_pizzas,teams_2,teams_3,teams_4,list_of_pizzas
+
+
+def scoring_system(pizza_list:list,all_ingredients:set,ingredients_of_team:set,pizza_dict:{}):
+    pizza_scores={}
+    needed_ingredients=set(all_ingredients.difference(ingredients_of_team))
+    for ID in pizza_list:
+        pizza_scores[ID]=len(needed_ingredients.intersection(pizza_dict[ID]))
     
-print(file_handling())
+    return pizza_scores
+#print(file_handling())
+print(scoring_system([],set(),set(),{}))
