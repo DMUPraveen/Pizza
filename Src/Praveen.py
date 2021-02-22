@@ -24,6 +24,7 @@ class ChooseBestPizza():
     def usePizza(self,PizzaId,PizzaToppings):
         self.usedPizzas.add(PizzaId)
         del(PizzaToppings[PizzaId])
+        #self.PizzaToppingList.remove()
 
 
 class Pizza_Key_Maker:
@@ -31,6 +32,7 @@ class Pizza_Key_Maker:
         self.dictionary = {}
         self.allIngrediants =set()
         self.PizzaToppings = {}
+        self.PizzaToppingList = []
 
     def add_pizza(self,id,line):
         ingrediants = line[1:]
@@ -43,7 +45,9 @@ class Pizza_Key_Maker:
             else:
                 self.dictionary[ingrediant] = [id]
 
-                
+    def createSortedList(self):
+        self.PizzaToppingList = [(key,self.PizzaToppings[key]) for key in self.PizzaToppings]
+        self.PizzaToppingList = sorted(self.PizzaToppingList,key = lambda x: len(x[1]) )           
 class DeliverSystem:
     def __init__(self,twoSize,threeSize,fourSize):
         self.Stack = [] # [set()->Ingrediants , []->PizzaIds]
@@ -94,6 +98,7 @@ def main(File_name):
     deliveries = DeliverSystem(teams_2,teams_3,teams_4)
     chooser = ChooseBestPizza()
     MiddleBreak = False
+    Pizzaid = -1
     for team_type in range(4,1,-1):
 
         for _ in range(deliveries.max_Sizes[team_type]):
@@ -102,14 +107,16 @@ def main(File_name):
                 if(len(PizzaData.PizzaToppings) == 0):
                     MiddleBreak = True
                     break
-
+                '''
                 Pizzaid = chooser.scoring_system(
                     PizzaData.allIngrediants,
                     deliveries.current_Delviery[0],
                     PizzaData.dictionary,
                     PizzaData.PizzaToppings
                     )
-
+                '''
+                #Pizzaid = max(PizzaData.PizzaToppings,key = lambda x:len(PizzaData.PizzaToppings[x]))
+                Pizzaid +=1
                 deliveries.add_Pizza_to_delivery(Pizzaid,PizzaData.PizzaToppings[Pizzaid])
                 chooser.usePizza(Pizzaid,PizzaData.PizzaToppings)
             if(MiddleBreak):

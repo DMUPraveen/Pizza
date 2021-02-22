@@ -8,8 +8,7 @@ print(fileNames)
 score = 0
 for fileName in fileNames:
     print(fileName)
-    if(fileName[0] == "c"):
-        continue
+
     score += main(fileName)
     print(score)
 print(score)
