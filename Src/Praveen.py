@@ -71,8 +71,8 @@ class DeliverSystem:
         with open(filePath,"w+") as f:
             f.write(f"{len(self.Stack)}\n")
             for delivery in self.Stack:
-                ids = " ".join(delivery[1])
-                team_type = len(ids)
+                ids = " ".join([str(i) for i in delivery[1]])
+                team_type = len(delivery[1])
                 f.write(f"{team_type} {ids}\n")
                 
 
@@ -94,10 +94,11 @@ def main():
     deliveries.add_Pizza_to_delivery(3,PizzaData.PizzaToppings[3])
     deliveries.add_Pizza_to_delivery(4,PizzaData.PizzaToppings[4])
     deliveries.createSolution("..\\Output\\test.txt")
-    
 
 
 
+if __name__ == "__main__":
+    main()
 
 
 
