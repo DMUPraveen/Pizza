@@ -60,11 +60,6 @@ class DeliverSystem:
         self.Stack.append([set(),[]])
         self.current_Delviery = self.Stack[-1]
         
-        
-
-        
-
-
     def add_Pizza_to_delivery(self,PizzaId,toppingSet):
         if(len(self.current_Delviery[1]) >= self.current_Delivery_team_type):
             return False
@@ -72,18 +67,34 @@ class DeliverSystem:
         self.current_Delviery[1].append(PizzaId)
         return True
 
+    def createSolution(self,filePath):
+        with open(filePath,"w+") as f:
+            f.write(f"{len(self.Stack)}\n")
+            for delivery in self.Stack:
+                ids = " ".join(delivery[1])
+                team_type = len(ids)
+                f.write(f"{team_type} {ids}\n")
+                
+
     
+def main():
+    os.chdir("C:\\Users\\USER\\Desktop\\Competition\\HashCode\\Pizza\\Src")
+    no_pizzas,teams_2,teams_3,teams_4,list_of_pizzas = file_handling()
+    PizzaData = Pizza_Key_Maker()
+    for id,line in enumerate(list_of_pizzas):
+        PizzaData.add_pizza(id,line)
 
-os.chdir("C:\\Users\\USER\\Desktop\\Competition\\HashCode\\Pizza\\Src")
-no_pizzas,teams_2,teams_3,teams_4,list_of_pizzas = file_handling()
-PizzaData = Pizza_Key_Maker()
-for id,line in enumerate(list_of_pizzas):
-    PizzaData.add_pizza(id,line)
-
-deliveries = DeliverSystem(teams_2,teams_3,teams_4)
-chooser = ChooseBestPizza()
-
-
+    deliveries = DeliverSystem(teams_2,teams_3,teams_4)
+    chooser = ChooseBestPizza()
+    deliveries.push_delivery(2)
+    deliveries.add_Pizza_to_delivery(0,PizzaData.PizzaToppings[0])
+    deliveries.add_Pizza_to_delivery(1,PizzaData.PizzaToppings[1])
+    deliveries.push_delivery(3)
+    deliveries.add_Pizza_to_delivery(2,PizzaData.PizzaToppings[2])
+    deliveries.add_Pizza_to_delivery(3,PizzaData.PizzaToppings[3])
+    deliveries.add_Pizza_to_delivery(4,PizzaData.PizzaToppings[4])
+    deliveries.createSolution("..\\Output\\test.txt")
+    
 
 
 
