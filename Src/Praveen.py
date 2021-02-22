@@ -10,6 +10,15 @@ class Pizza_Key_Maker:
             else:
                 self.dictionary[ingrediant] = [id]
                 
+class Deliveries:
+    def __init__(self,two,three,four):
+        self.two_deliveries = []
+        self.three_deliveris =[]
+        self.four_deliveries = []
+    
+
+    def deliver(self):
+    
 
 
         
