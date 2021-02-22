@@ -1,5 +1,5 @@
 
-def score(y):
+def score(y,z):
 
 
     f=open(y, "r").readlines()
@@ -14,7 +14,7 @@ def score(y):
     # print(f)
 
 
-    ingredients=open("b_little_bit_of_everything.in","r").readlines()
+    ingredients=open(z,"r").readlines()
 
     ingredients_list=[]
 
@@ -55,4 +55,4 @@ def score(y):
     return sum(topping_count)
 
 
-print(score("Submission.txt"))
+print(score("Submission.txt","b_little_bit_of_everything.in"))
