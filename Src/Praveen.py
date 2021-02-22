@@ -12,12 +12,10 @@ class ChooseBestPizza():
             for id in pizza_dict[ingredient]:
                 if(id not in self.usedPizzas):
                     pizza_scores[id] += 1
-        return max([pizza_scores[i] for i in pizza_scores])
+        return max(pizza_scores,key=pizza_scores.get)
     def usePizza(self,PizzaId):
         self.usedPizzas.add(PizzaId)
         
-
-
 
 
 class Pizza_Key_Maker:
@@ -60,10 +58,6 @@ class DeliverSystem:
         self.Stack.append([set(),[]])
         self.current_Delviery = self.Stack[-1]
         
-        
-
-        
-
 
     def add_Pizza_to_delivery(self,PizzaId,toppingSet):
         if(len(self.current_Delviery[1]) >= self.current_Delivery_team_type):
